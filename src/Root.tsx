@@ -19,6 +19,11 @@ const calculateMetadata: CalculateMetadataFunction<{ spec: VideoSpec }> = ({
     ...dimensions(spec.target.aspect),
     fps: spec.target.fps,
     durationInFrames: durationInFrames(spec),
+    // Capture lossless frames when the spec embeds source video. The default
+    // JPEG quality 80 capture lifts zero colour channels in saturated footage.
+    ...(spec.scenes.some((scene) => scene.kind === "video-window")
+      ? { defaultVideoImageFormat: "png" as const }
+      : {}),
   };
 };
 
