@@ -57,6 +57,13 @@ Create a starter spec:
 npm run video:scaffold -- proof-walkthrough "Why this equation works"
 ```
 
+Remotion downloads its own headless browser on first use. If that download is
+blocked, point it at an existing Chrome or Chromium binary:
+
+```bash
+REMOTION_BROWSER_EXECUTABLE=/path/to/chromium npm run video:preview -- my-video.video.json
+```
+
 ## Audio without an API key
 
 Audio intent is explicit. Set `audio.mode` to `narration`, `music`, or `silent`.
